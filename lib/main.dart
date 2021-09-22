@@ -27,7 +27,9 @@ class MyApp extends StatelessWidget {
           appBar: AppBar(
             title: Text("Happy 🐦-Day"),
           ),
-          body: SafeArea(child: HomeScreen()),
+          body: SafeArea(
+            child: HomeScreen(),
+          ),
           floatingActionButton: CreateBirthdayFAB(),
         ),
       ),
