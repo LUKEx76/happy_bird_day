@@ -26,18 +26,22 @@ String dateToDisplayString(int day, int month, int? year) {
   return result;
 }
 
-Map<DateTime, List<Birthday>> parseBirthdays(List<Birthday> birthdays) {
-  Map<DateTime, List<Birthday>> birthdayMocks = Map();
+Map<DateTime, List<Birthday>> parseBirthdays(List<Birthday>? birthdays) {
+  Map<DateTime, List<Birthday>> birthdayMap = Map();
+
+  if (birthdays == null || birthdays.isEmpty) {
+    return birthdayMap;
+  }
 
   for (var birthday in birthdays) {
-    if (birthdayMocks.containsKey(birthday.eventDate)) {
-      birthdayMocks.update(birthday.eventDate!, (value) {
+    if (birthdayMap.containsKey(birthday.eventDate)) {
+      birthdayMap.update(birthday.eventDate!, (value) {
         value.add(birthday);
         return value;
       });
     }
-    birthdayMocks.putIfAbsent(birthday.eventDate!, () => [birthday]);
+    birthdayMap.putIfAbsent(birthday.eventDate!, () => [birthday]);
   }
 
-  return birthdayMocks;
+  return birthdayMap;
 }

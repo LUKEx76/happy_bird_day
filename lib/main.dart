@@ -8,6 +8,7 @@ void main() {
 }
 
 //TODO: Implement Notifications for todays BDays
+//TODO: Add Animations
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:happy_bird_day/home/birthday_list_tile.dart';
-import 'package:happy_bird_day/mock.dart';
 import 'package:happy_bird_day/models/birthday.dart';
 import 'package:happy_bird_day/services/db_service.dart';
 import 'package:happy_bird_day/services/util.dart';
@@ -8,6 +7,9 @@ import 'package:happy_bird_day/stlyes.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class BirthdayCalendar extends StatefulWidget {
+  final DateTime? selectedDate;
+
+  const BirthdayCalendar({this.selectedDate});
   @override
   _BirthdayCalendarState createState() => _BirthdayCalendarState();
 }
@@ -15,15 +17,15 @@ class BirthdayCalendar extends StatefulWidget {
 class _BirthdayCalendarState extends State<BirthdayCalendar> {
   CalendarFormat _calendarFormat = CalendarFormat.month;
   Map<CalendarFormat, String> _availableCalendarFormats = Map();
-  DateTime _focusedDay = DateTime.now();
-  DateTime? _selectedDay;
+  DateTime _focusedDate = DateTime.now();
+  DateTime? _selectedDate;
   List<dynamic> _selectedEvents = [];
   Map<DateTime, List<dynamic>> _birthdays = Map();
 
   @override
   void initState() {
     _availableCalendarFormats.putIfAbsent(_calendarFormat, () => "month");
-    _selectedEvents = _getEvents(_focusedDay);
+    _selectedEvents = _getEvents(_focusedDate);
     super.initState();
   }
 
@@ -42,13 +44,13 @@ class _BirthdayCalendarState extends State<BirthdayCalendar> {
           if (snapshot.connectionState == ConnectionState.none) {
             return Container();
           }
-          _birthdays = parseBirthdays(snapshot.data!);
+          _birthdays = parseBirthdays(snapshot.data);
           return Column(
             children: [
               TableCalendar(
                 firstDay: DateTime.fromMillisecondsSinceEpoch(-2208992400000),
                 lastDay: DateTime.fromMillisecondsSinceEpoch(4102441200000),
-                focusedDay: _focusedDay,
+                focusedDay: _focusedDate,
                 calendarFormat: _calendarFormat,
                 startingDayOfWeek: StartingDayOfWeek.monday,
                 availableCalendarFormats: _availableCalendarFormats,
@@ -77,13 +79,13 @@ class _BirthdayCalendarState extends State<BirthdayCalendar> {
                   return _getEvents(day);
                 },
                 selectedDayPredicate: (day) {
-                  return isSameDay(_selectedDay, day);
+                  return isSameDay(_selectedDate, day);
                 },
                 onDaySelected: (selectedDay, focusedDay) {
-                  if (!isSameDay(_selectedDay, selectedDay)) {
+                  if (!isSameDay(_selectedDate, selectedDay)) {
                     setState(() {
-                      _selectedDay = selectedDay;
-                      _focusedDay = focusedDay;
+                      _selectedDate = selectedDay;
+                      _focusedDate = focusedDay;
                       _selectedEvents = _getEvents(focusedDay);
                     });
                   }
@@ -96,7 +98,7 @@ class _BirthdayCalendarState extends State<BirthdayCalendar> {
                   }
                 },
                 onPageChanged: (focusedDay) {
-                  _focusedDay = focusedDay;
+                  _focusedDate = focusedDay;
                 },
               ),
               Divider(),
