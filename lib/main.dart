@@ -4,12 +4,14 @@ import 'package:happy_bird_day/home/home_screen.dart';
 import 'package:happy_bird_day/stlyes.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(BirdDayApp());
 }
 
 //TODO: Implement Notifications for todays BDays
 //TODO: Add Animations
-class MyApp extends StatelessWidget {
+//TODO: Add AppIcon and PackageDomain
+//TODO: Refactor Directory Structure
+class BirdDayApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

@@ -1,44 +1,45 @@
 import 'package:flutter/material.dart';
+import 'package:happy_bird_day/models/birthday.dart';
+import 'package:happy_bird_day/services/util.dart';
 import 'package:happy_bird_day/stlyes.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 //TODO: Make Calender take Parameters from HomeScreen
 class BirthdayCalendar extends StatefulWidget {
   final DateTime? selectedDate;
+  final Map<DateTime, List<Birthday>>? birthdayMap;
 
-  const BirthdayCalendar({this.selectedDate});
+  const BirthdayCalendar({this.birthdayMap, this.selectedDate});
   @override
   _BirthdayCalendarState createState() => _BirthdayCalendarState();
 }
 
 class _BirthdayCalendarState extends State<BirthdayCalendar> {
+  DateTime _selectedDate = DateTime.now();
+  Map<DateTime, List<Birthday>> _birthdays = Map();
+
   CalendarFormat _calendarFormat = CalendarFormat.month;
   Map<CalendarFormat, String> _availableCalendarFormats = Map();
-  DateTime _focusedDate = DateTime.now();
-  DateTime? _selectedDate;
-  List<dynamic> _selectedEvents = [];
-  Map<DateTime, List<dynamic>> _birthdays = Map();
 
   @override
   void initState() {
     _availableCalendarFormats.putIfAbsent(_calendarFormat, () => "month");
-    _selectedEvents = _getEvents(_focusedDate);
-    super.initState();
-  }
-
-  List<dynamic> _getEvents(DateTime day) {
-    if (!_birthdays.containsKey(day)) {
-      return [];
+    if (widget.selectedDate != null) {
+      _selectedDate = widget.selectedDate!;
     }
-    return _birthdays[day]!.toList();
+    if (widget.birthdayMap != null) {
+      _birthdays = widget.birthdayMap!;
+    }
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    print(widget.selectedDate);
     return TableCalendar(
       firstDay: DateTime.fromMillisecondsSinceEpoch(-2208992400000),
       lastDay: DateTime.fromMillisecondsSinceEpoch(4102441200000),
-      focusedDay: _focusedDate,
+      focusedDay: _selectedDate,
       calendarFormat: _calendarFormat,
       startingDayOfWeek: StartingDayOfWeek.monday,
       availableCalendarFormats: _availableCalendarFormats,
@@ -64,7 +65,7 @@ class _BirthdayCalendarState extends State<BirthdayCalendar> {
         outsideDaysVisible: false,
       ),
       eventLoader: (day) {
-        return _getEvents(day);
+        return getBirthdayEventsFromMap(_birthdays, day);
       },
       selectedDayPredicate: (day) {
         return isSameDay(_selectedDate, day);
@@ -73,21 +74,19 @@ class _BirthdayCalendarState extends State<BirthdayCalendar> {
         if (!isSameDay(_selectedDate, selectedDay)) {
           setState(() {
             _selectedDate = selectedDay;
-            _focusedDate = focusedDay;
-            _selectedEvents = _getEvents(focusedDay);
           });
         }
       },
-      onFormatChanged: (format) {
-        if (_calendarFormat != format) {
-          setState(() {
-            _calendarFormat = format;
-          });
-        }
-      },
-      onPageChanged: (focusedDay) {
-        _focusedDate = focusedDay;
-      },
+      // onFormatChanged: (format) {
+      //   if (_calendarFormat != format) {
+      //     setState(() {
+      //       _calendarFormat = format;
+      //     });
+      //   }
+      // },
+      // onPageChanged: (focusedDay) {
+      //   _selectedDate = focusedDay;
+      // },
     );
   }
 }

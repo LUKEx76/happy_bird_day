@@ -47,8 +47,8 @@ Map<DateTime, List<Birthday>> parseBirthdays(List<Birthday>? birthdays) {
 }
 
 List<Birthday> getBirthdayEventsFromMap(
-    Map<DateTime, List<Birthday>>? birthdayMap, DateTime day) {
-  if (birthdayMap == null || !birthdayMap.containsKey(day)) {
+    Map<DateTime, List<Birthday>>? birthdayMap, DateTime? day) {
+  if (birthdayMap == null || day == null || !birthdayMap.containsKey(day)) {
     return [];
   }
   return birthdayMap[day]!.toList();
