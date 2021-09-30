@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:happy_bird_day/models/birthday.dart';
+import 'package:happy_bird_day/services/date_change_notifier.dart';
 import 'package:happy_bird_day/services/util.dart';
 import 'package:happy_bird_day/stlyes.dart';
+import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-//TODO: Make Calender take Parameters from HomeScreen
 class BirthdayCalendar extends StatefulWidget {
-  final DateTime? selectedDate;
   final Map<DateTime, List<Birthday>>? birthdayMap;
 
-  const BirthdayCalendar({this.birthdayMap, this.selectedDate});
+  const BirthdayCalendar({this.birthdayMap});
+
   @override
   _BirthdayCalendarState createState() => _BirthdayCalendarState();
 }
 
 class _BirthdayCalendarState extends State<BirthdayCalendar> {
-  DateTime _selectedDate = DateTime.now();
   Map<DateTime, List<Birthday>> _birthdays = Map();
+  DateTime _selectedDate = DateTime.now();
 
   CalendarFormat _calendarFormat = CalendarFormat.month;
   Map<CalendarFormat, String> _availableCalendarFormats = Map();
@@ -24,9 +25,6 @@ class _BirthdayCalendarState extends State<BirthdayCalendar> {
   @override
   void initState() {
     _availableCalendarFormats.putIfAbsent(_calendarFormat, () => "month");
-    if (widget.selectedDate != null) {
-      _selectedDate = widget.selectedDate!;
-    }
     if (widget.birthdayMap != null) {
       _birthdays = widget.birthdayMap!;
     }
@@ -35,7 +33,6 @@ class _BirthdayCalendarState extends State<BirthdayCalendar> {
 
   @override
   Widget build(BuildContext context) {
-    print(widget.selectedDate);
     return TableCalendar(
       firstDay: DateTime.fromMillisecondsSinceEpoch(-2208992400000),
       lastDay: DateTime.fromMillisecondsSinceEpoch(4102441200000),
@@ -74,6 +71,8 @@ class _BirthdayCalendarState extends State<BirthdayCalendar> {
         if (!isSameDay(_selectedDate, selectedDay)) {
           setState(() {
             _selectedDate = selectedDay;
+            Provider.of<DateChangeNotifier>(context, listen: false)
+                .setDate(_selectedDate);
           });
         }
       },

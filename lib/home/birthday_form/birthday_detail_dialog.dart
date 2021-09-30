@@ -15,24 +15,27 @@ class BirthdayDetailDialog extends StatelessWidget {
       title: Text("🐦-Day"),
       content: SizedBox(
         width: 300,
-        height: 120,
+        height: 150,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
               birthday.name,
               style: Theme.of(context).textTheme.headline3,
+              textAlign: TextAlign.center,
             ),
             Text(
               dateToDisplayString(
                   birthday.birthDay, birthday.birthMonth, birthday.birthYear),
               style: Theme.of(context).textTheme.subtitle2,
+              textAlign: TextAlign.center,
             ),
             Text(
               birthday.age > 0
                   ? "Turns " + birthday.age.toString() + " years old!"
                   : "",
               style: Theme.of(context).textTheme.overline,
+              textAlign: TextAlign.center,
             ),
           ],
         ),

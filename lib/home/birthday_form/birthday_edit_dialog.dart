@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:happy_bird_day/home/birthday_form/birthday_form.dart';
 import 'package:happy_bird_day/models/birthday.dart';
+import 'package:happy_bird_day/services/date_change_notifier.dart';
 import 'package:happy_bird_day/services/db_service.dart';
 import 'package:happy_bird_day/stlyes.dart';
+import 'package:provider/provider.dart';
 
 class BirthdayEditDialog extends StatefulWidget {
   final Birthday? birthday;
@@ -26,36 +28,44 @@ class _BirthdayEditDialogState extends State<BirthdayEditDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      title: Text("New Birthday"),
-      content: SizedBox(
-        width: 300,
-        height: 120,
-        child: BirthdayForm(birthday: _birthday),
-      ),
-      actions: [
-        TextButton(
-          child: Text(
-            "Save",
-            style: TextStyle(color: colorPalette.successColor),
+    return Consumer<DateChangeNotifier>(
+      builder: (context, dateChangeNotifier, child) {
+        if (widget.birthday == null) {
+          _birthday.birthDay = dateChangeNotifier.selectedDate.day;
+          _birthday.birthMonth = dateChangeNotifier.selectedDate.month;
+        }
+        return AlertDialog(
+          title: Text("New Birthday"),
+          content: SizedBox(
+            width: 300,
+            height: 120,
+            child: BirthdayForm(birthday: _birthday),
           ),
-          onPressed: () {
-            if (_birthday.id == null) {
-              DatabaseService().createBirthday(_birthday);
-            } else {
-              DatabaseService().updateBirthday(_birthday);
-            }
-            Navigator.pop(context);
-          },
-        ),
-        TextButton(
-          child: Text(
-            "Cancel",
-            style: TextStyle(color: Colors.white),
-          ),
-          onPressed: () => Navigator.pop(context),
-        )
-      ],
+          actions: [
+            TextButton(
+              child: Text(
+                "Save",
+                style: TextStyle(color: colorPalette.successColor),
+              ),
+              onPressed: () {
+                if (_birthday.id == null) {
+                  DatabaseService().createBirthday(_birthday);
+                } else {
+                  DatabaseService().updateBirthday(_birthday);
+                }
+                Navigator.pop(context);
+              },
+            ),
+            TextButton(
+              child: Text(
+                "Cancel",
+                style: TextStyle(color: Colors.white),
+              ),
+              onPressed: () => Navigator.pop(context),
+            )
+          ],
+        );
+      },
     );
   }
 }
