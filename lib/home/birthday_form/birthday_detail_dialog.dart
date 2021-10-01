@@ -8,8 +8,9 @@ import 'package:provider/provider.dart';
 
 class BirthdayDetailDialog extends StatelessWidget {
   final Birthday birthday;
+  final DateTime selectedDate;
 
-  BirthdayDetailDialog(this.birthday);
+  BirthdayDetailDialog({required this.birthday, required this.selectedDate});
 
   @override
   Widget build(BuildContext context) {
@@ -32,9 +33,11 @@ class BirthdayDetailDialog extends StatelessWidget {
               style: Theme.of(context).textTheme.subtitle2,
               textAlign: TextAlign.center,
             ),
-            birthday.age > 0
+            birthday.getAge(selectedDate.year) > 0
                 ? Text(
-                    "Turns " + birthday.age.toString() + " years old!",
+                    "Turns " +
+                        birthday.getAge(selectedDate.year).toString() +
+                        " years old!",
                     style: Theme.of(context).textTheme.overline,
                     textAlign: TextAlign.center,
                   )

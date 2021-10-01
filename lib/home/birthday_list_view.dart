@@ -20,8 +20,10 @@ class BirthdayListView extends StatelessWidget {
             return ListView.builder(
               //shrinkWrap: true,
               itemCount: _birthdays.length,
-              itemBuilder: (context, index) =>
-                  BirthdayListTile(birthday: _birthdays[index]),
+              itemBuilder: (context, index) => BirthdayListTile(
+                birthday: _birthdays[index],
+                selectedDate: dateChangeNotifier.selectedDate,
+              ),
             );
           },
         );

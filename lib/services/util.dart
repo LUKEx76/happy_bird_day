@@ -46,13 +46,18 @@ Map<DateTime, List<Birthday>> parseBirthdays(List<Birthday>? birthdays) {
   }
 
   for (var birthday in birthdays) {
-    if (birthdayMap.containsKey(birthday.eventDate)) {
-      birthdayMap.update(birthday.eventDate!, (value) {
-        value.add(birthday);
-        return value;
-      });
+    if (birthday.eventDates == null || birthday.eventDates!.isEmpty) {
+      continue;
     }
-    birthdayMap.putIfAbsent(birthday.eventDate!, () => [birthday]);
+    for (var eventDate in birthday.eventDates!) {
+      if (birthdayMap.containsKey(eventDate)) {
+        birthdayMap.update(eventDate, (value) {
+          value.add(birthday);
+          return value;
+        });
+      }
+      birthdayMap.putIfAbsent(eventDate, () => [birthday]);
+    }
   }
 
   return birthdayMap;

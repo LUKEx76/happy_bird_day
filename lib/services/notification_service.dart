@@ -47,8 +47,11 @@ class NotificationService {
     String body = "";
     for (var birthday in todaysBirthdays) {
       body = body + "\nIt's " + birthday.name + "'s birthday.";
-      if (birthday.age > 0) {
-        body = body + " He/She turns " + birthday.age.toString() + ".";
+      if (birthday.getAge(tz.TZDateTime.now(tz.local).year) > 0) {
+        body = body +
+            " He/She turns " +
+            birthday.getAge(tz.TZDateTime.now(tz.local).year).toString() +
+            ".";
       }
     }
     await flutterLocalNotificationsPlugin.zonedSchedule(
