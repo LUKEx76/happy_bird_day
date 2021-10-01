@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:happy_bird_day/models/birthday.dart';
 import 'package:happy_bird_day/services/db_service.dart';
+import 'package:happy_bird_day/services/util.dart';
 
 class BirthdayChangeNotifier extends ChangeNotifier {
   Map<DateTime, List<Birthday>> _birthdays = Map();
@@ -32,25 +33,5 @@ class BirthdayChangeNotifier extends ChangeNotifier {
       _birthdays = parseBirthdays(await DatabaseService().getAllBirthdays());
       notifyListeners();
     }
-  }
-
-  Map<DateTime, List<Birthday>> parseBirthdays(List<Birthday>? birthdays) {
-    Map<DateTime, List<Birthday>> birthdayMap = Map();
-
-    if (birthdays == null || birthdays.isEmpty) {
-      return birthdayMap;
-    }
-
-    for (var birthday in birthdays) {
-      if (birthdayMap.containsKey(birthday.eventDate)) {
-        birthdayMap.update(birthday.eventDate!, (value) {
-          value.add(birthday);
-          return value;
-        });
-      }
-      birthdayMap.putIfAbsent(birthday.eventDate!, () => [birthday]);
-    }
-
-    return birthdayMap;
   }
 }

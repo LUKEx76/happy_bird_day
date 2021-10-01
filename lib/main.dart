@@ -3,6 +3,7 @@ import 'package:happy_bird_day/home/create_birthday_fab.dart';
 import 'package:happy_bird_day/home/home_screen.dart';
 import 'package:happy_bird_day/services/birthday_change_notifier.dart';
 import 'package:happy_bird_day/services/date_change_notifier.dart';
+import 'package:happy_bird_day/services/notification_service.dart';
 import 'package:happy_bird_day/stlyes.dart';
 import 'package:provider/provider.dart';
 
@@ -18,13 +19,14 @@ void main() {
   );
 }
 
-//TODO: Implement Notifications for todays BDays
 //TODO: Add AppIcon and PackageDomain
 //TODO: Add (Loading-)Animations
 //TODO: Implement Export/Import
 class BirdDayApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    NotificationService().initNotifications();
+
     return GestureDetector(
       onTap: () {
         FocusScopeNode currentFocus = FocusScope.of(context);

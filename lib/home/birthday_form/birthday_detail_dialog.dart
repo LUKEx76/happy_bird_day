@@ -19,7 +19,7 @@ class BirthdayDetailDialog extends StatelessWidget {
         width: 300,
         height: 180,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Text(
               birthday.name,

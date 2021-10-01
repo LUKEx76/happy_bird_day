@@ -37,3 +37,23 @@ List<Birthday> getTodaysBirthdays(
   }
   return birthdayMap[dateWithoutTime]!.toList();
 }
+
+Map<DateTime, List<Birthday>> parseBirthdays(List<Birthday>? birthdays) {
+  Map<DateTime, List<Birthday>> birthdayMap = Map();
+
+  if (birthdays == null || birthdays.isEmpty) {
+    return birthdayMap;
+  }
+
+  for (var birthday in birthdays) {
+    if (birthdayMap.containsKey(birthday.eventDate)) {
+      birthdayMap.update(birthday.eventDate!, (value) {
+        value.add(birthday);
+        return value;
+      });
+    }
+    birthdayMap.putIfAbsent(birthday.eventDate!, () => [birthday]);
+  }
+
+  return birthdayMap;
+}
