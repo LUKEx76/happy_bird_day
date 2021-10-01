@@ -17,6 +17,7 @@ class BirthdayEditDialog extends StatefulWidget {
 
 class _BirthdayEditDialogState extends State<BirthdayEditDialog> {
   Birthday _birthday = Birthday();
+  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -38,8 +39,11 @@ class _BirthdayEditDialogState extends State<BirthdayEditDialog> {
           title: Text("New Birthday"),
           content: SizedBox(
             width: 300,
-            height: 120,
-            child: BirthdayForm(birthday: _birthday),
+            height: 180,
+            child: BirthdayForm(
+              birthday: _birthday,
+              formKey: _formKey,
+            ),
           ),
           actions: [
             TextButton(
@@ -48,9 +52,12 @@ class _BirthdayEditDialogState extends State<BirthdayEditDialog> {
                 style: TextStyle(color: colorPalette.successColor),
               ),
               onPressed: () {
-                Provider.of<BirthdayChangeNotifier>(context, listen: false)
-                    .upsertBirthday(_birthday);
-                Navigator.pop(context);
+                if (_formKey.currentState != null &&
+                    _formKey.currentState!.validate()) {
+                  Provider.of<BirthdayChangeNotifier>(context, listen: false)
+                      .upsertBirthday(_birthday);
+                  Navigator.pop(context);
+                }
               },
             ),
             TextButton(

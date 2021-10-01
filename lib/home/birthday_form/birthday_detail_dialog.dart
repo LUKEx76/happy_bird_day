@@ -17,13 +17,13 @@ class BirthdayDetailDialog extends StatelessWidget {
       title: Text("🐦-Day"),
       content: SizedBox(
         width: 300,
-        height: 150,
+        height: 180,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
               birthday.name,
-              style: Theme.of(context).textTheme.headline3,
+              style: Theme.of(context).textTheme.headline4,
               textAlign: TextAlign.center,
             ),
             Text(
@@ -32,13 +32,13 @@ class BirthdayDetailDialog extends StatelessWidget {
               style: Theme.of(context).textTheme.subtitle2,
               textAlign: TextAlign.center,
             ),
-            Text(
-              birthday.age > 0
-                  ? "Turns " + birthday.age.toString() + " years old!"
-                  : "",
-              style: Theme.of(context).textTheme.overline,
-              textAlign: TextAlign.center,
-            ),
+            birthday.age > 0
+                ? Text(
+                    "Turns " + birthday.age.toString() + " years old!",
+                    style: Theme.of(context).textTheme.overline,
+                    textAlign: TextAlign.center,
+                  )
+                : Container(),
           ],
         ),
       ),

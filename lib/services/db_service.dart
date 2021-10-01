@@ -57,16 +57,11 @@ class DatabaseService {
     return query.map((json) => Birthday.fromJson(json)).toList();
   }
 
-  Stream<List<Birthday>> get birthdayStream {
-    //That wont work :(
-    return Stream.fromFuture(getAllBirthdays());
-  }
-
   Future<int> updateBirthday(Birthday birthday) async {
     final db = await instance.database;
 
     return await db.update(
-      'Birthday',
+      'Birthdays',
       birthday.toJson(),
       where: '_id = ?',
       whereArgs: [birthday.id],

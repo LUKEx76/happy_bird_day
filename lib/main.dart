@@ -19,8 +19,8 @@ void main() {
 }
 
 //TODO: Implement Notifications for todays BDays
-//TODO: Add Animations
 //TODO: Add AppIcon and PackageDomain
+//TODO: Add (Loading-)Animations
 //TODO: Implement Export/Import
 class BirdDayApp extends StatelessWidget {
   @override
