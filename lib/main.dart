@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:happy_bird_day/home/create_birthday_fab.dart';
 import 'package:happy_bird_day/home/home_screen.dart';
+import 'package:happy_bird_day/services/birthday_change_notifier.dart';
 import 'package:happy_bird_day/services/date_change_notifier.dart';
 import 'package:happy_bird_day/stlyes.dart';
 import 'package:provider/provider.dart';
 
 void main() {
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => DateChangeNotifier(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => DateChangeNotifier()),
+        ChangeNotifierProvider(create: (context) => BirthdayChangeNotifier()),
+      ],
       child: BirdDayApp(),
     ),
   );

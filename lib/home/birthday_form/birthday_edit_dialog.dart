@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:happy_bird_day/home/birthday_form/birthday_form.dart';
 import 'package:happy_bird_day/models/birthday.dart';
+import 'package:happy_bird_day/services/birthday_change_notifier.dart';
 import 'package:happy_bird_day/services/date_change_notifier.dart';
-import 'package:happy_bird_day/services/db_service.dart';
 import 'package:happy_bird_day/stlyes.dart';
 import 'package:provider/provider.dart';
 
@@ -48,11 +48,8 @@ class _BirthdayEditDialogState extends State<BirthdayEditDialog> {
                 style: TextStyle(color: colorPalette.successColor),
               ),
               onPressed: () {
-                if (_birthday.id == null) {
-                  DatabaseService().createBirthday(_birthday);
-                } else {
-                  DatabaseService().updateBirthday(_birthday);
-                }
+                Provider.of<BirthdayChangeNotifier>(context, listen: false)
+                    .upsertBirthday(_birthday);
                 Navigator.pop(context);
               },
             ),

@@ -73,13 +73,16 @@ class DatabaseService {
     );
   }
 
-  Future<int> deleteBirthday(int id) async {
+  Future<int> deleteBirthday(Birthday birthday) async {
     final db = await instance.database;
 
-    return await db.delete(
-      'Birthdays',
-      where: '_id = ?',
-      whereArgs: [id],
-    );
+    if (birthday.id != null) {
+      return await db.delete(
+        'Birthdays',
+        where: '_id = ?',
+        whereArgs: [birthday.id],
+      );
+    }
+    return 0;
   }
 }
