@@ -19,13 +19,15 @@ void main() {
   );
 }
 
+//TODO: ListView for Birthdays
 //TODO: Add AppIcon and PackageDomain
-//TODO: Add (Loading-)Animations
+//TODO: Fix Notifications
 //TODO: Implement Export/Import
 class BirdDayApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    NotificationService().initNotifications();
+    // Only schedule Notifications if they were not scheduled before!
+    NotificationService().scheduleBirthdayNotificationTask();
 
     return GestureDetector(
       onTap: () {
