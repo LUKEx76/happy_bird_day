@@ -6,19 +6,24 @@ import 'package:happy_bird_day/services/db_service.dart';
 import 'package:happy_bird_day/services/util.dart';
 import 'package:workmanager/workmanager.dart';
 
+// Needs to be outside of the class so the isolate can access it
+final String _notificationTaskName = "birthdayReminderTask";
+final NotificationDetails _notificationDetails = NotificationDetails(
+  android: AndroidNotificationDetails(
+    'channel id',
+    'channel name',
+    'channel description',
+    importance: Importance.defaultImportance,
+    priority: Priority.defaultPriority,
+    styleInformation: BigTextStyleInformation(''),
+  ),
+  iOS: IOSNotificationDetails(),
+);
+
 class NotificationService {
-  final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-      FlutterLocalNotificationsPlugin();
-  final String _notificationTaskName = "birthdayReminderTask";
-
-  Future initNotifications() async {
-    await flutterLocalNotificationsPlugin.initialize(InitializationSettings(
-      android: AndroidInitializationSettings('@mipmap/ic_launcher'),
-      iOS: IOSInitializationSettings(),
-    ));
-  }
-
   void scheduleBirthdayNotificationTask() {
+    Workmanager().initialize(callbackDispatcher);
+
     Duration _initialDelay = Duration();
     DateTime now = DateTime.now();
     if (now.isAfter(DateTime.utc(now.year, now.month, now.day, 8))) {
@@ -35,57 +40,49 @@ class NotificationService {
           seconds: -now.second);
     }
     Workmanager().registerPeriodicTask(
-      "1",
+      "9",
       _notificationTaskName,
       frequency: Duration(days: 1),
       initialDelay: _initialDelay,
     );
   }
+}
 
-  final NotificationDetails _notificationDetails = NotificationDetails(
-    android: AndroidNotificationDetails(
-      'channel id',
-      'channel name',
-      'channel description',
-      importance: Importance.defaultImportance,
-      priority: Priority.defaultPriority,
-      //ongoing: true,
-      styleInformation: BigTextStyleInformation(''),
-    ),
-    iOS: IOSNotificationDetails(),
-  );
+void callbackDispatcher() {
+  final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+      FlutterLocalNotificationsPlugin();
 
-  void callbackDispatcher() {
-    Workmanager().executeTask((task, inputData) async {
-      if (task == _notificationTaskName) {
-        await initNotifications();
-        List<Birthday> todaysBirthdays = getTodaysBirthdays(
-            parseBirthdays(await DatabaseService().getAllBirthdays()),
-            DateTime.now());
+  Workmanager().executeTask((task, inputData) async {
+    if (task == _notificationTaskName) {
+      await flutterLocalNotificationsPlugin.initialize(InitializationSettings(
+        //TODO: Set Android Notification Icon
+        android: AndroidInitializationSettings('@mipmap/ic_launcher'),
+        iOS: IOSInitializationSettings(),
+      ));
 
-        if (todaysBirthdays.isEmpty) {
-          return Future.value(true);
+      List<Birthday> todaysBirthdays = getTodaysBirthdays(
+          parseBirthdays(await DatabaseService().getAllBirthdays()),
+          DateTime.now());
+
+      for (var birthday in todaysBirthdays) {
+        String title = "It's " + birthday.name + "'s birthday today!";
+        String? body;
+
+        if (birthday.getAge(DateTime.now().year) > 0) {
+          body = birthday.name +
+              " turns " +
+              birthday.getAge(DateTime.now().year).toString() +
+              " years old.";
         }
-        String body = "";
-        for (var birthday in todaysBirthdays) {
-          body = body + "\nIt's " + birthday.name + "'s birthday.";
-          if (birthday.getAge(DateTime.now().year) > 0) {
-            body = body +
-                " He/She turns " +
-                birthday.getAge(DateTime.now().year).toString() +
-                ".";
-          }
-        }
+
         await flutterLocalNotificationsPlugin.show(
           Random().nextInt(5000),
-          "It's " +
-              todaysBirthdays.length.toString() +
-              " peoples birthday today!",
+          title,
           body,
           _notificationDetails,
         );
       }
-      return Future.value(true);
-    });
-  }
+    }
+    return Future.value(true);
+  });
 }
