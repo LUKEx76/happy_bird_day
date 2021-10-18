@@ -13,7 +13,7 @@ class BirthdayMonthCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       color: Color.lerp(colorPalette.primaryColor, colorPalette.darkAccentColor,
-          monthIndex / 12),
+          (monthIndex + 1) / 13),
       child: Column(
         children: [
           Text(
@@ -32,7 +32,7 @@ class BirthdayMonthCard extends StatelessWidget {
                     return SizedBox(
                       height: 20,
                       child: Padding(
-                        padding: EdgeInsets.only(left: 20),
+                        padding: EdgeInsets.only(left: 15),
                         child: Text(birthdays[index].name +
                             " - " +
                             birthdays[index].birthDay.toString() +

@@ -40,7 +40,7 @@ class NotificationService {
           seconds: -now.second);
     }
     Workmanager().registerPeriodicTask(
-      "9",
+      "13",
       _notificationTaskName,
       frequency: Duration(days: 1),
       initialDelay: _initialDelay,
@@ -55,7 +55,6 @@ void callbackDispatcher() {
   Workmanager().executeTask((task, inputData) async {
     if (task == _notificationTaskName) {
       await flutterLocalNotificationsPlugin.initialize(InitializationSettings(
-        //TODO: Set Android Notification Icon
         android: AndroidInitializationSettings('@mipmap/ic_launcher'),
         iOS: IOSInitializationSettings(),
       ));

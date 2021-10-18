@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.happy_bird_day">
+    package="com.lukex76.happy_bird_day">
    <application
-        android:label="happy_bird_day"
+        android:label="Happy BirdDay"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

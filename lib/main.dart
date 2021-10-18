@@ -18,7 +18,6 @@ void main() {
   );
 }
 
-//TODO: Add AppIcon and PackageDomain
 //TODO: Implement Export/Import
 class BirdDayApp extends StatelessWidget {
   @override

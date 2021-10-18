@@ -1,4 +1,4 @@
-package com.example.happy_bird_day
+package com.lukex76.happy_bird_day
 
 import io.flutter.embedding.android.FlutterActivity
 
