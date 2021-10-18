@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 var colorPalette = ColorPalette(
   Color(0xFF9e579d),
@@ -17,6 +18,9 @@ var birdDayThemeData = ThemeData(
   accentColor: colorPalette.primaryColor,
   scaffoldBackgroundColor: colorPalette.backgroundColor,
   errorColor: Colors.red,
+  textTheme: GoogleFonts.latoTextTheme(
+    ThemeData(brightness: Brightness.dark).textTheme,
+  ),
   floatingActionButtonTheme: FloatingActionButtonThemeData(
     backgroundColor: colorPalette.primaryColor,
     foregroundColor: Colors.white,

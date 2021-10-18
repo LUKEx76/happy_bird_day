@@ -62,3 +62,31 @@ Map<DateTime, List<Birthday>> parseBirthdays(List<Birthday>? birthdays) {
 
   return birthdayMap;
 }
+
+List<Birthday> getBirthdaysFromMonthIndex(
+    Map<DateTime, List<Birthday>> birthdays, int monthIndex) {
+  List<Birthday> result = [];
+
+  for (int day = 1; day <= 31; day++) {
+    result.addAll(
+        birthdays[DateTime.utc(DateTime.now().year, monthIndex + 1, day)] ??
+            []);
+  }
+
+  return result;
+}
+
+Map<int, String> monthMap = {
+  0: "January",
+  1: "February",
+  2: "March",
+  3: "April",
+  4: "May",
+  5: "June",
+  6: "July",
+  7: "August",
+  8: "September",
+  9: "October",
+  10: "November",
+  11: "December",
+};

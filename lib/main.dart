@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:happy_bird_day/home/create_birthday_fab.dart';
 import 'package:happy_bird_day/home/home_screen.dart';
 import 'package:happy_bird_day/services/birthday_change_notifier.dart';
 import 'package:happy_bird_day/services/date_change_notifier.dart';
@@ -19,7 +18,6 @@ void main() {
   );
 }
 
-//TODO: ListView for Birthdays
 //TODO: Add AppIcon and PackageDomain
 //TODO: Implement Export/Import
 class BirdDayApp extends StatelessWidget {
@@ -38,15 +36,7 @@ class BirdDayApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Happy Birdday',
         theme: birdDayThemeData,
-        home: Scaffold(
-          appBar: AppBar(
-            title: Text("Happy 🐦-Day"),
-          ),
-          body: SafeArea(
-            child: HomeScreen(),
-          ),
-          floatingActionButton: CreateBirthdayFAB(),
-        ),
+        home: HomeScreen(),
       ),
     );
   }
