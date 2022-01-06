@@ -67,12 +67,11 @@ List<Birthday> getBirthdaysFromMonthIndex(
     Map<DateTime, List<Birthday>> birthdays, int monthIndex) {
   List<Birthday> result = [];
 
-  for (int day = 1; day <= 31; day++) {
-    result.addAll(
-        birthdays[DateTime.utc(DateTime.now().year, monthIndex + 1, day)] ??
-            []);
-  }
-
+  birthdays.forEach((key, value) {
+    print(key.toString() + value.toString());
+    if (key.year == DateTime.now().year && key.month == monthIndex + 1)
+      result.addAll(value);
+  });
   return result;
 }
 

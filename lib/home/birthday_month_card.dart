@@ -33,12 +33,27 @@ class BirthdayMonthCard extends StatelessWidget {
                       height: 20,
                       child: Padding(
                         padding: EdgeInsets.only(left: 15),
-                        child: Text(birthdays[index].name +
-                            " - " +
-                            birthdays[index].birthDay.toString() +
-                            "." +
-                            birthdays[index].birthMonth.toString() +
-                            "."),
+                        child: Row(
+                          children: [
+                            SizedBox(
+                              width: 120,
+                              child: Text(
+                                birthdays[index].name,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                            Text(
+                              " - " +
+                                  birthdays[index].birthDay.toString() +
+                                  "." +
+                                  birthdays[index].birthMonth.toString() +
+                                  ".",
+                              maxLines: 1,
+                              overflow: TextOverflow.fade,
+                            ),
+                          ],
+                        ),
                       ),
                     );
                   },
