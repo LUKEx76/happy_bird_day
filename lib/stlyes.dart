@@ -18,6 +18,7 @@ var birdDayThemeData = ThemeData(
   accentColor: colorPalette.primaryColor,
   scaffoldBackgroundColor: colorPalette.backgroundColor,
   errorColor: Colors.red,
+  appBarTheme: AppBarTheme(backgroundColor: Colors.grey[900]),
   textTheme: GoogleFonts.latoTextTheme(
     ThemeData(brightness: Brightness.dark).textTheme,
   ),

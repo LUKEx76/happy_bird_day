@@ -26,6 +26,28 @@ String dateToDisplayString(int day, int month, int? year) {
   return result;
 }
 
+String dateToDisplayStringMonthDayDot(int day, int month) {
+  if (day == 0 || month == 0) {
+    return "";
+  }
+
+  String result = "";
+  if (day < 10) {
+    result += "0" + day.toString();
+  } else {
+    result += day.toString();
+  }
+  result += ".";
+  if (month < 10) {
+    result += "0" + month.toString();
+  } else {
+    result += month.toString();
+  }
+
+  result += ".";
+  return result;
+}
+
 List<Birthday> getTodaysBirthdays(
     Map<DateTime, List<Birthday>>? birthdayMap, DateTime? date) {
   if (birthdayMap == null || date == null) {

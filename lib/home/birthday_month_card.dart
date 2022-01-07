@@ -45,10 +45,9 @@ class BirthdayMonthCard extends StatelessWidget {
                             ),
                             Text(
                               " - " +
-                                  birthdays[index].birthDay.toString() +
-                                  "." +
-                                  birthdays[index].birthMonth.toString() +
-                                  ".",
+                                  dateToDisplayStringMonthDayDot(
+                                      birthdays[index].birthDay,
+                                      birthdays[index].birthMonth),
                               maxLines: 1,
                               overflow: TextOverflow.fade,
                             ),
