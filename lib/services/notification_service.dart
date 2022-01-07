@@ -4,7 +4,6 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_native_timezone/flutter_native_timezone.dart';
 import 'package:happy_bird_day/models/birthday.dart';
 import 'package:happy_bird_day/services/db_service.dart';
-import 'package:happy_bird_day/services/util.dart';
 import 'package:workmanager/workmanager.dart';
 
 import 'package:timezone/timezone.dart' as tz;
@@ -36,12 +35,9 @@ class NotificationService {
     Duration _initialDelay =
         _nextInstanceOfTenAM().difference(tz.TZDateTime.now(tz.local));
 
-    // Alternative if Time shifting keeps occuring:
-    // Always cancel every Task and register a new periodic Task
-    // every Time the App starts
-    Workmanager().cancelByUniqueName("13"); //Shifted in Time
-    Workmanager().registerPeriodicTask(
-      "14",
+    await Workmanager().cancelAll();
+    await Workmanager().registerPeriodicTask(
+      "23",
       _notificationTaskName,
       frequency: Duration(days: 1),
       initialDelay: _initialDelay,
@@ -72,18 +68,17 @@ void callbackDispatcher() {
         ),
       );
 
-      List<Birthday> todaysBirthdays = getTodaysBirthdays(
-          parseBirthdays(await DatabaseService().getAllBirthdays()),
-          tz.TZDateTime.now(tz.local));
+      List<Birthday> todaysBirthdays =
+          await DatabaseService().getTodaysBirthdays();
 
       for (var birthday in todaysBirthdays) {
         String title = "It's " + birthday.name + "'s birthday today!";
         String? body;
 
-        if (birthday.getAge(tz.TZDateTime.now(tz.local).year) > 0) {
+        if (birthday.getAge(DateTime.now().year) > 0) {
           body = birthday.name +
               " turns " +
-              birthday.getAge(tz.TZDateTime.now(tz.local).year).toString() +
+              birthday.getAge(DateTime.now().year).toString() +
               " years old.";
         }
 

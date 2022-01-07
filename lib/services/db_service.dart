@@ -80,4 +80,19 @@ class DatabaseService {
     }
     return 0;
   }
+
+  Future<List<Birthday>> getTodaysBirthdays() async {
+    final db = await instance.database;
+    DateTime today = DateTime.now();
+    final query = await db.query(
+      'Birthdays',
+      where: 'BirthDay = ? AND BirthMonth = ?',
+      whereArgs: [today.day, today.month],
+    );
+
+    if (query.isNotEmpty) {
+      return query.map((json) => Birthday.fromJson(json)).toList();
+    }
+    return [];
+  }
 }
