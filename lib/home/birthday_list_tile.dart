@@ -31,7 +31,8 @@ class BirthdayListTile extends StatelessWidget {
                 ' years old!')
             : null,
         trailing: Text(dateToDisplayString(
-            birthday.birthDay, birthday.birthMonth, birthday.birthYear)),
+            birthday.birthDay, birthday.birthMonth,
+            year: birthday.birthYear)),
       ),
     );
   }

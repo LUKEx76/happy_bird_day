@@ -29,30 +29,27 @@ class BirthdayMonthCard extends StatelessWidget {
                   physics: NeverScrollableScrollPhysics(),
                   itemCount: birthdays.length,
                   itemBuilder: (context, index) {
-                    return SizedBox(
-                      height: 20,
-                      child: Padding(
-                        padding: EdgeInsets.only(left: 15),
-                        child: Row(
-                          children: [
-                            SizedBox(
-                              width: 120,
-                              child: Text(
-                                birthdays[index].name,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ),
-                            Text(
-                              " - " +
-                                  dateToDisplayStringMonthDayDot(
-                                      birthdays[index].birthDay,
-                                      birthdays[index].birthMonth),
+                    return Padding(
+                      padding: EdgeInsets.only(left: 15),
+                      child: Row(
+                        children: [
+                          SizedBox(
+                            width: 120,
+                            child: Text(
+                              birthdays[index].name,
                               maxLines: 1,
                               overflow: TextOverflow.fade,
+                              softWrap: false,
                             ),
-                          ],
-                        ),
+                          ),
+                          Text(
+                            " - " +
+                                dateToDisplayString(birthdays[index].birthDay,
+                                    birthdays[index].birthMonth,
+                                    delimiter: ".", displayYear: false),
+                            maxLines: 1,
+                          ),
+                        ],
                       ),
                     );
                   },

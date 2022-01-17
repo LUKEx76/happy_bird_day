@@ -28,8 +28,8 @@ class BirthdayDetailDialog extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             Text(
-              dateToDisplayString(
-                  birthday.birthDay, birthday.birthMonth, birthday.birthYear),
+              dateToDisplayString(birthday.birthDay, birthday.birthMonth,
+                  year: birthday.birthYear),
               style: Theme.of(context).textTheme.subtitle2,
               textAlign: TextAlign.center,
             ),

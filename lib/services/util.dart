@@ -1,50 +1,30 @@
 import 'package:happy_bird_day/models/birthday.dart';
 
-String dateToDisplayString(int day, int month, int? year) {
-  if (day == 0 || month == 0) {
-    return "";
-  }
-
+String dateToDisplayString(int day, int month,
+    {int? year, String delimiter = "/", bool displayYear = true}) {
   String result = "";
-  if (day < 10) {
+
+  if (day < 10)
     result += "0" + day.toString();
-  } else {
+  else
     result += day.toString();
-  }
-  result += "/";
-  if (month < 10) {
+
+  result += delimiter;
+
+  if (month < 10)
     result += "0" + month.toString();
-  } else {
+  else
     result += month.toString();
-  }
-  if (year == null) {
-    result += "/ - - - -";
-    return result;
+
+  result += delimiter;
+
+  if (displayYear) {
+    if (year != null)
+      result += year.toString();
+    else
+      result += " - - - -";
   }
 
-  result += "/" + year.toString();
-  return result;
-}
-
-String dateToDisplayStringMonthDayDot(int day, int month) {
-  if (day == 0 || month == 0) {
-    return "";
-  }
-
-  String result = "";
-  if (day < 10) {
-    result += "0" + day.toString();
-  } else {
-    result += day.toString();
-  }
-  result += ".";
-  if (month < 10) {
-    result += "0" + month.toString();
-  } else {
-    result += month.toString();
-  }
-
-  result += ".";
   return result;
 }
 
