@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_native_timezone/flutter_native_timezone.dart';
 import 'package:happy_bird_day/models/birthday.dart';
-import 'package:happy_bird_day/services/db_service.dart';
+import 'package:happy_bird_day/services/birthday_change_notifier.dart';
 import 'package:workmanager/workmanager.dart';
 
 import 'package:timezone/timezone.dart' as tz;
@@ -69,7 +69,7 @@ void callbackDispatcher() {
       );
 
       List<Birthday> todaysBirthdays =
-          await DatabaseService().getTodaysBirthdays();
+          await BirthdayChangeNotifier().getBirthdaysByDate(DateTime.now());
 
       for (var birthday in todaysBirthdays) {
         String title = "It's " + birthday.name + "'s birthday today!";

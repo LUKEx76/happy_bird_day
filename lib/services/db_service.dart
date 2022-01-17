@@ -36,20 +36,6 @@ class DatabaseService {
     return await db.insert('Birthdays', birthday.toJson());
   }
 
-  Future<Birthday?> getBirthday(int id) async {
-    final db = await instance.database;
-    final query = await db.query(
-      'Birthdays',
-      where: '_id = ?',
-      whereArgs: [id],
-    );
-
-    if (query.isNotEmpty) {
-      return Birthday.fromJson(query.first);
-    }
-    return null;
-  }
-
   Future<List<Birthday>> getAllBirthdays() async {
     final db = await instance.database;
     final query = await db.query('Birthdays');
@@ -81,13 +67,12 @@ class DatabaseService {
     return 0;
   }
 
-  Future<List<Birthday>> getTodaysBirthdays() async {
+  Future<List<Birthday>> getBirthdaysByDate(DateTime date) async {
     final db = await instance.database;
-    DateTime today = DateTime.now();
     final query = await db.query(
       'Birthdays',
       where: 'BirthDay = ? AND BirthMonth = ?',
-      whereArgs: [today.day, today.month],
+      whereArgs: [date.day, date.month],
     );
 
     if (query.isNotEmpty) {

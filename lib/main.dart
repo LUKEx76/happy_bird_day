@@ -33,7 +33,7 @@ class BirdDayApp extends StatelessWidget {
         }
       },
       child: MaterialApp(
-        title: 'Happy Birdday',
+        title: 'Happy BirdDay',
         theme: birdDayThemeData,
         home: HomeScreen(),
       ),

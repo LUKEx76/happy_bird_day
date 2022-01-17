@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:happy_bird_day/services/birthday_change_notifier.dart';
 import 'package:happy_bird_day/services/date_change_notifier.dart';
-import 'package:happy_bird_day/services/util.dart';
 import 'package:happy_bird_day/stlyes.dart';
 import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -12,12 +11,13 @@ class BirthdayCalendar extends StatefulWidget {
 }
 
 class _BirthdayCalendarState extends State<BirthdayCalendar> {
-  late DateTime _selectedDate;
   Map<CalendarFormat, String> _calendarFormat = Map<CalendarFormat, String>();
+  late DateTime _selectedDate;
 
   @override
   void initState() {
     _selectedDate = DateTime.now();
+    print("initState: " + _selectedDate.toString());
     _calendarFormat.putIfAbsent(CalendarFormat.month, () => "month");
     super.initState();
   }
@@ -55,30 +55,18 @@ class _BirthdayCalendarState extends State<BirthdayCalendar> {
             outsideDaysVisible: false,
           ),
           eventLoader: (day) {
-            return getTodaysBirthdays(birthdayChangeNotifier.birthdays, day);
+            return birthdayChangeNotifier.allBirthdays[day] ?? [];
           },
           selectedDayPredicate: (day) {
             return isSameDay(_selectedDate, day);
           },
           onDaySelected: (selectedDay, focusedDay) {
             if (!isSameDay(_selectedDate, selectedDay)) {
-              setState(() {
-                _selectedDate = selectedDay;
-                Provider.of<DateChangeNotifier>(context, listen: false)
-                    .setDate(_selectedDate);
-              });
+              setState(() => _selectedDate = selectedDay);
+              Provider.of<DateChangeNotifier>(context, listen: false)
+                  .setDate(_selectedDate);
             }
           },
-          // onFormatChanged: (format) {
-          //   if (_calendarFormat != format) {
-          //     setState(() {
-          //       _calendarFormat = format;
-          //     });
-          //   }
-          // },
-          // onPageChanged: (focusedDay) {
-          //   _selectedDate = focusedDay;
-          // },
         );
       },
     );

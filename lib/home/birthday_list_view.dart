@@ -16,7 +16,7 @@ class BirthdayListView extends StatelessWidget {
           itemCount: 12,
           itemBuilder: (context, index) {
             _birthdays = getBirthdaysFromMonthIndex(
-                birthdayChangeNotifier.birthdays, index);
+                birthdayChangeNotifier.allBirthdays, index);
             return BirthdayMonthCard(
               birthdays: _birthdays,
               monthIndex: index,

@@ -1,12 +1,18 @@
 import 'package:flutter/foundation.dart';
 
 class DateChangeNotifier extends ChangeNotifier {
-  DateTime _selectedDate = DateTime.now();
+  late DateTime _selectedDate;
+
+  DateChangeNotifier() {
+    _selectedDate = DateTime.now();
+    notifyListeners();
+  }
 
   DateTime get selectedDate => _selectedDate;
 
   void setDate(DateTime date) {
     _selectedDate = date;
+    print("setDate: " + date.toString());
     notifyListeners();
   }
 }
