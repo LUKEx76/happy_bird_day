@@ -14,8 +14,12 @@ var colorPalette = ColorPalette(
 
 var birdDayThemeData = ThemeData(
   brightness: Brightness.dark,
-  primarySwatch: MaterialColor(0xFF9e579d, swatch), //primaryColor
-  accentColor: colorPalette.primaryColor,
+  colorScheme: ColorScheme.fromSwatch(
+    primarySwatch: MaterialColor(0xFF9e579d, swatch),
+    brightness: Brightness.dark,
+    accentColor: colorPalette.primaryColor,
+  ),
+  indicatorColor: colorPalette.primaryColor,
   scaffoldBackgroundColor: colorPalette.backgroundColor,
   errorColor: Colors.red,
   appBarTheme: AppBarTheme(backgroundColor: Colors.grey[900]),

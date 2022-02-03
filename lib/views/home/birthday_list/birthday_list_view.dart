@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:happy_bird_day/home/birthday_month_card.dart';
 import 'package:happy_bird_day/models/birthday.dart';
 import 'package:happy_bird_day/services/birthday_change_notifier.dart';
 import 'package:happy_bird_day/services/util.dart';
+import 'package:happy_bird_day/views/home/birthday_list/birthday_month_card.dart';
 import 'package:provider/provider.dart';
 
 class BirthdayListView extends StatelessWidget {

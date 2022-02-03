@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:happy_bird_day/home/birthday_list_view.dart';
-import 'package:happy_bird_day/home/calendar_tab_view.dart';
-import 'package:happy_bird_day/home/create_birthday_fab.dart';
+import 'package:happy_bird_day/views/home/birthday_list/birthday_list_view.dart';
+import 'package:happy_bird_day/views/home/calendar_tab_view.dart';
+import 'package:happy_bird_day/views/home/create_birthday_fab.dart';
+import 'package:happy_bird_day/views/settings/settings_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -17,6 +18,20 @@ class _HomeScreenState extends State<HomeScreen> {
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
           title: Text("Happy 🐦-Day"),
+          actions: [
+            IconButton(
+              icon: Icon(
+                Icons.settings,
+                color: Theme.of(context).unselectedWidgetColor,
+              ),
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => SettingsScreen(),
+                ),
+              ),
+            ),
+          ],
           bottom: TabBar(
             tabs: [
               Tab(icon: Icon(Icons.calendar_today_outlined)),

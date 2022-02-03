@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:happy_bird_day/home/home_screen.dart';
 import 'package:happy_bird_day/services/birthday_change_notifier.dart';
 import 'package:happy_bird_day/services/date_change_notifier.dart';
 import 'package:happy_bird_day/services/notification_service.dart';
 import 'package:happy_bird_day/stlyes.dart';
+import 'package:happy_bird_day/views/home/home_screen.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -20,7 +20,6 @@ void main() {
 
 //TODO: Implement Export/Import
 //TODO: Create Splashscreen
-//TODO: Create Settings/DonationScreen
 class BirdDayApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

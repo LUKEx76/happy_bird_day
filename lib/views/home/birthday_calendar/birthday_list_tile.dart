@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:happy_bird_day/home/birthday_form/birthday_detail_dialog.dart';
 import 'package:happy_bird_day/services/util.dart';
 import 'package:happy_bird_day/models/birthday.dart';
+import 'package:happy_bird_day/views/home/birthday_form/birthday_detail_dialog.dart';
 
 class BirthdayListTile extends StatelessWidget {
   final Birthday birthday;

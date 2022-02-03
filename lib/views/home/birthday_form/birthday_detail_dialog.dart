@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:happy_bird_day/home/birthday_form/birthday_edit_dialog.dart';
 import 'package:happy_bird_day/services/birthday_change_notifier.dart';
 import 'package:happy_bird_day/services/util.dart';
 import 'package:happy_bird_day/models/birthday.dart';
 import 'package:happy_bird_day/stlyes.dart';
+import 'package:happy_bird_day/views/home/birthday_form/birthday_edit_dialog.dart';
 import 'package:provider/provider.dart';
 
 class BirthdayDetailDialog extends StatelessWidget {
