@@ -17,7 +17,6 @@ class _BirthdayCalendarState extends State<BirthdayCalendar> {
   @override
   void initState() {
     _selectedDate = DateTime.now();
-    print("initState: " + _selectedDate.toString());
     _calendarFormat.putIfAbsent(CalendarFormat.month, () => "month");
     super.initState();
   }

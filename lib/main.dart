@@ -19,6 +19,8 @@ void main() {
 }
 
 //TODO: Implement Export/Import
+//TODO: Create Splashscreen
+//TODO: Create Settings/DonationScreen
 class BirdDayApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

@@ -12,7 +12,6 @@ class DateChangeNotifier extends ChangeNotifier {
 
   void setDate(DateTime date) {
     _selectedDate = date;
-    print("setDate: " + date.toString());
     notifyListeners();
   }
 }
