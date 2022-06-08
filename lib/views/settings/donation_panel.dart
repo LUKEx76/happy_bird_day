@@ -23,8 +23,8 @@ class DonationPanel extends StatelessWidget {
                 text: "PayPal me",
                 style: TextStyle(color: Colors.blue),
                 recognizer: TapGestureRecognizer()
-                  ..onTap =
-                      () => launch('https://www.paypal.com/paypalme/LUKEx76'),
+                  ..onTap = () => launchUrl(
+                      Uri(path: 'https://www.paypal.com/paypalme/LUKEx76')),
               ),
             ),
             Text(
