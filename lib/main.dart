@@ -20,6 +20,8 @@ void main() {
 
 //TODO: Implement Export/Import
 //TODO: Create Splashscreen
+//TODO: Order Birthdays on ListView
+//TODO: Introduce new theme
 class BirdDayApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

@@ -6,13 +6,6 @@ class SettingsList extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 5),
-          child: Text(
-            "Settings",
-            style: Theme.of(context).textTheme.headline6,
-          ),
-        ),
         ListTile(
           title: Text("Transfer Birthdays (soon)"),
           subtitle: Text(

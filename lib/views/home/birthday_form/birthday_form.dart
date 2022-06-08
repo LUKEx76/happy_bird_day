@@ -38,6 +38,7 @@ class _BirthdayFormState extends State<BirthdayForm> {
             decoration: InputDecoration(labelText: "Name"),
             validator: (input) {
               if (input == null || input.isEmpty) return "!";
+              return null;
             },
             onChanged: (value) => setState(
               () => _birthday.name = value.trim(),
@@ -66,6 +67,7 @@ class _BirthdayFormState extends State<BirthdayForm> {
                     if (int.tryParse(input.trim()) == null) return "!";
                     int day = int.parse(input.trim());
                     if (day < 1 || day > 31) return "!";
+                    return null;
                   },
                   onChanged: (value) => setState(
                       () => _birthday.birthDay = int.tryParse(value) ?? 0),
@@ -90,6 +92,7 @@ class _BirthdayFormState extends State<BirthdayForm> {
                     if (int.tryParse(input.trim()) == null) return "!";
                     int month = int.parse(input.trim());
                     if (month < 1 || month > 12) return "!";
+                    return null;
                   },
                   onChanged: (value) => setState(
                       () => _birthday.birthMonth = int.tryParse(value) ?? 0),
@@ -113,6 +116,7 @@ class _BirthdayFormState extends State<BirthdayForm> {
                       int year = int.parse(input.trim());
                       if (year < 1900 || year > DateTime.now().year) return "!";
                     }
+                    return null;
                   },
                   onChanged: (value) =>
                       setState(() => _birthday.birthYear = int.tryParse(value)),

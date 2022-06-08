@@ -6,20 +6,15 @@ class DonationPanel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 300,
+      height: 250,
       child: Padding(
         padding: EdgeInsets.all(20),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Divider(),
             Text(
-              "This app does not contain any ads and is completely free",
-              textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.subtitle2,
-            ),
-            Text(
-              "If you enjoy using this app and want to support the creator consider donating:",
+              "This app completely ad-free\nIf you enjoy the app please consider donating:",
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.subtitle2,
             ),
@@ -39,7 +34,7 @@ class DonationPanel extends StatelessWidget {
             ),
             Text(
               "🎈🎂🐦",
-              style: Theme.of(context).textTheme.headline6,
+              style: Theme.of(context).textTheme.headline4,
             ),
           ],
         ),

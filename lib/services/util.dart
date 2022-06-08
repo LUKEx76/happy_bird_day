@@ -36,6 +36,7 @@ List<Birthday> getBirthdaysFromMonthIndex(
     if (key.year == DateTime.now().year && key.month == monthIndex + 1)
       result.addAll(value);
   });
+  //birthdays.sort();
   return result;
 }
 
